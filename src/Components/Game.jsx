@@ -10,7 +10,7 @@ const Game = ({game}) => {
             </td>
             <td style={{ cursor: "alias" }}>
         <a href={`/games/${game.id}`} rel="noreferrer">
-          {game.name}
+          {game.title}
         </a>
       </td>
       <td>

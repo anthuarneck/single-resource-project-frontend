@@ -27,11 +27,11 @@ const Games = () => {
                             <th>See this game.</th>
                         </tr>
                     </thead>
-                    {/* <tbody>
+                    <tbody>
                         {games.map((game) => {
                             return <Game key={game.id} game={game}/>
                         })}
-                    </tbody> */}
+                    </tbody>
                 </table>
             </section>
         </div>
