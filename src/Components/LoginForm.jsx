@@ -21,7 +21,7 @@ const LoginForm = () => {
       },
     })
       .then(() => {
-        navigate(`/`);
+        navigate(`/games`);
       })
       .catch((error) => console.error("catch", error));
   };
