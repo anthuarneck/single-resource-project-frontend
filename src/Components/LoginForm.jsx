@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 
 const API = import.meta.env.VITE_API_URL;
@@ -77,6 +77,10 @@ const LoginForm = () => {
         <br />
         <input type="submit" />
       </form>
+      <br />
+      <p>
+        <Link to="/register">Register New Account</Link>
+      </p>
     </div>
   );
 };
