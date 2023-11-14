@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 
-const Game = ({game}) => {
-    return (
-        <tr>
-            <td>
-                {game.available ? (<span>👾</span>) : (
-          <span>&nbsp; &nbsp; &nbsp;</span>
-        )}
-            </td>
-            <td style={{ cursor: "alias" }}>
+const Game = ({ game }) => {
+  return (
+    <tr>
+      <td>
+        {game.available ? <span>👾</span> : <span>&nbsp; &nbsp; &nbsp;</span>}
+      </td>
+      <td style={{ cursor: "alias" }}>
         <a href={`/games/${game.id}`} rel="noreferrer">
           {game.title}
         </a>
@@ -16,8 +14,8 @@ const Game = ({game}) => {
       <td>
         <Link to={`/games/${game.id}`}>✏️</Link>
       </td>
-        </tr>
-    );
-}
+    </tr>
+  );
+};
 
 export default Game;
