@@ -7,19 +7,25 @@ const API = import.meta.env.VITE_API_URL;
 const LoginForm = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
+    email: "",
     password: "",
   });
 
-  const addUser = () => {
-    fetch(`${API}/users/register`, {
+  const loginUser = () => {
+    fetch(`${API}/users/`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json",
       },
     })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        alert("Login failed: Invalid email or password");
+        throw new Error('Login Failed')
+      })
       .then(() => {
         navigate(`/games`);
       })
@@ -32,30 +38,12 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addUser();
+    loginUser();
   };
 
   return (
     <div className="LoginForm">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name:</label>
-        <input
-          id="firstName"
-          value={user.firstName}
-          type="text"
-          onChange={handleTextChange}
-          placeholder="First Name"
-          required
-        />
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          id="lastName"
-          value={user.lastName}
-          type="text"
-          onChange={handleTextChange}
-          placeholder="Last Name"
-          required
-        />
         <label htmlFor="email">Email:</label>
         <input
           id="email"

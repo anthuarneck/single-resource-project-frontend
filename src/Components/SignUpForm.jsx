@@ -9,6 +9,7 @@ const SignUpForm = () => {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
+    email: "",
     password: "",
     passwordConfirmation: "",
   });
@@ -35,6 +36,7 @@ const SignUpForm = () => {
     event.preventDefault();
     addUser();
   };
+
 
   return (
     <div className="SignUpForm">
