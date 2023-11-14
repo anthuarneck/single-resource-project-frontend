@@ -24,10 +24,12 @@ const LoginForm = () => {
           return response.json();
         }
         alert("Login failed: Invalid email or password");
-        throw new Error('Login Failed')
+        throw new Error("Login Failed");
       })
-      .then(() => {
-        navigate(`/games`);
+      .then((userData) => {
+        console.log(userData);
+        setUser((prevState) => ({ ...prevState, id: userData.id }));
+        navigate(`/${userData.user.id}/games`);
       })
       .catch((error) => console.error("catch", error));
   };
