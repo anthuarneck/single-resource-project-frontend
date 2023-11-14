@@ -26,8 +26,8 @@ const GameDetails = () => {
   const deleteGame = () => {
     const httpOptions = { method: "DELETE" }
     fetch(`${API}/games/${id}`, httpOptions)
-    .then(() => navigate(`/games`))
-    .catch(error => console.log(error))
+        .then(() => navigate(`/games`))
+        .catch(error => console.log(error))
   }
 
   return (
