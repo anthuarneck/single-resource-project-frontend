@@ -10,7 +10,6 @@ const Games = () => {
     fetch(`${API}/games`)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setGames(response.data.payload);
       })
       .catch((err) => {
