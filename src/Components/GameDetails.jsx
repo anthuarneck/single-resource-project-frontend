@@ -40,10 +40,10 @@ const GameDetails = () => {
       <div className="transactionDetails">
         <h3>Title: {game.title}</h3>
         <h3>Amount: ${game.price}</h3>
-        <h3>game ID: {game.esrb_rating}</h3>
-        <h5>Date: {game.release_year}</h5>
-        <h5>Location: {game.available ? "👾" : "TBD"}</h5>
-        <h5>Category: {game.genre}</h5>
+        <h3>ESRB Rating: {game.esrb_rating}</h3>
+        <h5>Game Released: {game.release_year}</h5>
+        <h5>Available: {game.available ? "👾" : "TBD"}</h5>
+        <h5>Genre: {game.genre}</h5>
         <h5>Score: {game.score}</h5>
       </div>
       <div className="navigation">
@@ -51,7 +51,7 @@ const GameDetails = () => {
           <button>Back</button>
         </Link>
 
-        <button onClick={deleteGame}>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
       </div>
     </article>
 
