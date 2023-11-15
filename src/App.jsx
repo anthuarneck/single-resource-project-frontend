@@ -10,6 +10,7 @@ import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import GamesCart from "./Components/gamesCart";
 import FavoriteGames from "./Components/FavoriteGames";
+import Error from "./Pages/Error";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/games" element={<Games />} />
           <Route path="/cart" element={<GamesCart />} />
           <Route path="/users/:userId/favoritedGames" element={<FavoriteGames />} />
+          <Route path="*" element={<Error />} />
         </Routes>
     </Router>
   </div>
