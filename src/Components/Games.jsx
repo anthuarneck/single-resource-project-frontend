@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Game from "./Game";
+import { useParams } from "react-router-dom";
 
 const API = import.meta.env.VITE_API_URL;
 
 const Games = () => {
   const [games, setGames] = useState([]);
+  const { userId } = useParams();
 
   useEffect(() => {
-    fetch(`${API}/games`)
+    fetch(`${API}/users/${userId}/games`)
       .then((response) => response.json())
       .then((response) => {
         setGames(response.data.payload);

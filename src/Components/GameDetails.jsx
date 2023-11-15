@@ -5,11 +5,11 @@ const API = import.meta.env.VITE_API_URL;
 
 const GameDetails = () => {
   const [game, setGame] = useState([]);
-  let { index } = useParams();
+  let { userId, index } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API}/games/${index}`)
+    fetch(`${API}/users/${userId}/games/${index}`)
       .then((response) => response.json())
       .then((response) => {
         setGame(response);
@@ -26,7 +26,7 @@ const GameDetails = () => {
 
   const deleteGame = () => {
     const httpOptions = { method: "DELETE" };
-    fetch(`${API}/games/${id}`, httpOptions)
+    fetch(`${API}/users/${userId}/games/${index}`, httpOptions)
       .then((response) => {
         alert(`You have just deleted the game from your games list`);
         navigate(`/games`);

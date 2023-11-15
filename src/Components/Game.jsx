@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Game = ({ game }) => {
+    const { userId } = useParams();
+    
   return (
     <tr>
       <td>
         {game.available ? <span>👾</span> : <span>&nbsp; &nbsp; &nbsp;</span>}
       </td>
       <td style={{ cursor: "alias" }}>
-        <a href={`/games/${game.id}`} rel="noreferrer">
+        <a href={`/users/${userId}/games/${game.id}`} rel="noreferrer">
           {game.title}
         </a>
       </td>
