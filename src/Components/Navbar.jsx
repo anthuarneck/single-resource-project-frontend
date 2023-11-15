@@ -1,7 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from "react";
+import { Link, useParams } from 'react-router-dom';
+
+const API = import.meta.env.VITE_API_URL;
 
 const Navbar = () => {
+    const { userId } = useParams()
+
+
+    useEffect(() => {
+        if (userId) {
+          fetch(`${API}/users/${userId}/favoritedGames`)
+            .then((response) => response.json())
+            .then((response) => {
+              console.log(response);
+              setFavoritedGames(response);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      }, [userId]); 
+
     return (
         <nav>
             <h2>
