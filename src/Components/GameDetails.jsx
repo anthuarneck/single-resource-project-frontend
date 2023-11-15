@@ -5,16 +5,19 @@ const API = import.meta.env.VITE_API_URL;
 
 const GameDetails = () => {
   const [game, setGame] = useState([]);
-  let { id } = useParams();
+  let { index } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API}/games/${id}`)
+    fetch(`${API}/games/${index}`)
       .then((response) => response.json())
-      .then((game) => setGame(game))
-      console.log(game)
-      .catch((navigate) => navigate(`/404`));
-  }, [id, navigate]);
+      .then((response) => {
+        setGame(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
 
   const handleDelete = () => {
@@ -28,7 +31,7 @@ const GameDetails = () => {
         alert(`You have just deleted the game from your games list`);
         navigate(`/games`);
       })
-      .catch((error) => console.error(error));
+    //   .catch((error) => console.error(error));
   };
 
   return (
@@ -40,7 +43,8 @@ const GameDetails = () => {
         <h3>game ID: {game.esrb_rating}</h3>
         <h5>Date: {game.release_year}</h5>
         <h5>Location: {game.available ? "👾" : "TBD"}</h5>
-        <h5>Category: {game.category}</h5>
+        <h5>Category: {game.genre}</h5>
+        <h5>Score: {game.score}</h5>
       </div>
       <div className="navigation">
         <Link to={"/games"}>
