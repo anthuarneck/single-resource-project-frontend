@@ -1,46 +1,48 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "./UserComponents/UserContext";
 
 const API = import.meta.env.VITE_API_URL;
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+  const [userInput, setUserInput] = useState({
     email: "",
     password: "",
   });
+  const {loginUser, user, setUser} = useAuth();
 
-  const loginUser = () => {
-    fetch(`${API}/users/`, {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        alert("Login failed: Invalid email or password");
-        throw new Error("Login Failed");
-      })
-      .then((userData) => {
-        console.log(userData);
-        setUser((prevState) => ({ ...prevState, id: userData.id }));
-        navigate(`/${userData.user.id}/games`);
-      })
-      .catch((error) => console.error("catch", error));
-  };
+  // const loginUser = () => {
+  //   fetch(`${API}/users/`, {
+  //     method: "POST",
+  //     body: JSON.stringify(user),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       }
+  //       alert("Login failed: Invalid email or password");
+  //       throw new Error("Login Failed");
+  //     })
+  //     .then((userData) => {
+  //       console.log(userData);
+  //       setUser((prevState) => ({ ...prevState, id: userData.id }));
+  //       navigate(`/users/${userData.user.id}/games`);
+  //     })
+  //     .catch((error) => console.error("catch", error));
+  // };
 
   const handleTextChange = (event) => {
-    setUser({ ...user, [event.target.id]: event.target.value });
+    setUserInput({ ...userInput, [event.target.id]: event.target.value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginUser();
+    loginUser(userInput);
   };
 
   return (
@@ -49,7 +51,7 @@ const LoginForm = () => {
         <label htmlFor="email">Email:</label>
         <input
           id="email"
-          value={user.email}
+          value={userInput.email}
           type="text"
           onChange={handleTextChange}
           placeholder="Email"
@@ -58,7 +60,7 @@ const LoginForm = () => {
         <label htmlFor="password">Password:</label>
         <input
           id="password"
-          value={user.password}
+          value={userInput.password}
           type="text"
           onChange={handleTextChange}
           placeholder="Password"
