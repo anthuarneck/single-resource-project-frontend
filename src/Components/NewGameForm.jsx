@@ -5,7 +5,7 @@ const API = import.meta.env.VITE_API_URL;
 
 const NewGameForm = () => {
   const [game, setGame] = useState({
-    user_id,
+    // user_id,
     title: "",
     price: 0.0,
     esrb_rating: "",

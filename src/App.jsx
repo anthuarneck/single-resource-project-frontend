@@ -12,6 +12,8 @@ import GamesCart from "./Components/gamesCart";
 import FavoriteGames from "./Components/FavoriteGames";
 import Error from "./Pages/Error";
 import Show from "./Pages/Show";
+import New from "./Pages/New";
+import Edit from "./Pages/Edit";
 
 function App() {
 
@@ -28,7 +30,10 @@ function App() {
           <Route path="/games/:index" element={<Show/>} />
           <Route path="/cart" element={<GamesCart />} />
           <Route path="/users/:userId/favoritedGames" element={<FavoriteGames />} />
+          <Route path="/new" element={<New />} />
+          <Route path="/edit" element={<Edit />} />
           <Route path="*" element={<Error />} />
+          
         </Routes>
     </Router>
   </div>
