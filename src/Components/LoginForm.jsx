@@ -29,7 +29,8 @@ const LoginForm = () => {
       .then((userData) => {
         console.log(userData);
         setUser((prevState) => ({ ...prevState, id: userData.id }));
-        navigate(`/${userData.user.id}/games`);
+        navigate(`/games`);
+        // navigate(`/${userData.user.id}/games`);
       })
       .catch((error) => console.error("catch", error));
   };
