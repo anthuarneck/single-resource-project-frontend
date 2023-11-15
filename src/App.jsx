@@ -11,6 +11,7 @@ import Login from "./Pages/Login";
 import GamesCart from "./Components/gamesCart";
 import FavoriteGames from "./Components/FavoriteGames";
 import Error from "./Pages/Error";
+import Show from "./Pages/Show";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/games" element={<Games />} />
+          <Route path="/games/:index" element={<Show/>} />
           <Route path="/cart" element={<GamesCart />} />
           <Route path="/users/:userId/favoritedGames" element={<FavoriteGames />} />
           <Route path="*" element={<Error />} />
