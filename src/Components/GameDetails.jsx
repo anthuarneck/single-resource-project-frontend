@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useAuth } from "./UserComponents/UserContext";
-
 
 const API = import.meta.env.VITE_API_URL;
 
 const GameDetails = () => {
   const [game, setGame] = useState([]);
-  const { user } = useAuth();
   let { index, userId } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API}/users/${user.id}/games/${index}`)
+    fetch(`${API}/users/${userId}/games/${index}`)
       .then((response) => response.json())
       .then((response) => {
         setGame(response);
@@ -37,30 +34,31 @@ const GameDetails = () => {
 
   const deleteGame = () => {
     const httpOptions = { method: "DELETE" };
-    fetch(`${API}/users/${user.id}/games/${index}`, httpOptions)
+    fetch(`${API}/users/${userId}/games/${index}`, httpOptions)
       .then((response) => {
         alert(`You have just deleted the game from your games list`);
-        navigate(`/users/${user.id}/games`);
+        navigate(`/users/${userId}/games`);
       })
       .catch((error) => console.error(error));
   };
 
   const favoriteGame = () => {
     const httpOptions = { method: "POST" };
-    fetch(`${API}/users/${user.id}/favoritedGames`, httpOptions)
+    fetch(`${API}/users/${userId}/favoritedGames`, httpOptions)
+      .then((response) => response.json())
       .then((response) => {
         alert(`Game has been added to your favorites.`);
-        navigate(`/users/${user.id}/favoritedGames`);
+        navigate(`/users/${userId}/favoritedGames`);
       })
       .catch((error) => console.error(error));
   };
 
   const addGameToCart = () => {
     const httpOptions = { method: "POST" };
-    fetch(`${API}/users/${user.id}/cart`, httpOptions)
+    fetch(`${API}/users/${userId}/cart`, httpOptions)
       .then((response) => {
         alert(`You have just deleted the game from your games list`);
-        navigate(`/users/${user.id}/games`);
+        navigate(`/users/${userId}/games`);
       })
       .catch((error) => console.error(error));
   };
@@ -78,7 +76,7 @@ const GameDetails = () => {
         <h5>Score: {game.score}</h5>
       </div>
       <div className="navigation">
-        <Link to={`/users/${user.id}/games`}>
+        <Link to={`/users/${userId}/games`}>
           <button>Back</button>
         </Link>
 
