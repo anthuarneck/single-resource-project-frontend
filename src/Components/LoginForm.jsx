@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "./UserComponents/UserContext";
@@ -12,6 +12,13 @@ const LoginForm = () => {
     password: "",
   });
   const {loginUser, user, setUser} = useAuth();
+  
+  useEffect(() => {
+    if (user.id) {
+      console.log(user.id)
+      navigate(`/users/${user.id}/games`)
+    }
+  }, [user])
 
   // const loginUser = () => {
   //   fetch(`${API}/users/`, {
