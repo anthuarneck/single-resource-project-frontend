@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "./UserComponents/UserContext";
-
 
 const API = import.meta.env.VITE_API_URL;
 
 const NewGameForm = () => {
-    const { user } = useAuth();
+  let { userId } = useParams();
 
   const [game, setGame] = useState({
     title: "",
@@ -20,15 +18,21 @@ const NewGameForm = () => {
   const navigate = useNavigate();
 
   const addGame = () => {
-    fetch(`${API}/users/${user.id}/games/new`, {
+    fetch(`${API}/users/${userId}/games`, {
       method: "POST",
       body: JSON.stringify(game),
       headers: {
         "Content-Type": "application/json",
       },
     })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then(() => {
-        navigate(`/users/${user.id}/games`);
+        navigate(`/users/${userId}/games`);
       })
       .catch((error) => {
         console.error(error);
@@ -36,7 +40,12 @@ const NewGameForm = () => {
   };
 
   const handleFormTextChange = (e) => {
-    setGame({ ...game, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+    const updatedValue =
+      id === "price" || id === "release_year" || id === "score"
+        ? parseFloat(value) || 0
+        : value;
+    setGame({ ...game, [id]: updatedValue });
   };
 
   const handleCheckbox = () => {
@@ -51,22 +60,22 @@ const NewGameForm = () => {
   return (
     <div className="NewGameForm">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="Title">Title:</label>
+        <label htmlFor="title">Title:</label>
         <input
-          id="Title"
+          id="title"
           value={game.title}
           type="text"
-          onChange={(e) => setGame({ ...game, title: e.target.value })}
+          onChange={handleFormTextChange}
           placeholder="Game title"
           required
         />
-        <label htmlFor="Price">Price:</label>
+        <label htmlFor="price">Price:</label>
         <input
-          id="Price"
+          id="price"
           value={game.price}
           type="number"
           step={0.01}
-          onChange={(e) => setGame({ ...game, price: e.target.value })}
+          onChange={handleFormTextChange}
           placeholder="Enter the price of the game."
           required
         />
@@ -75,16 +84,16 @@ const NewGameForm = () => {
           id="esrb_rating"
           value={game.esrb_rating}
           type="text"
-          onChange={(e) => setGame({ ...game, esrb_rating: e.target.value })}
-          placeholder="Enter esrb (Entertainment Software Rating Board) rating for the game ex. 'Teen'"
+          onChange={handleFormTextChange}
+          placeholder="Enter ESRB rating for the game ex. 'Teen'"
           required
         />
-        <label htmlFor="release_Year">Year Of Release:</label>
+        <label htmlFor="release_year">Year Of Release:</label>
         <input
-          id="release_Year"
+          id="release_year"
           value={game.release_year}
           type="number"
-          onChange={(e) => setGame({ ...game, release_year: e.target.value })}
+          onChange={handleFormTextChange}
           placeholder="Year of release"
           required
         />
@@ -92,7 +101,7 @@ const NewGameForm = () => {
         <input
           id="available"
           type="checkbox"
-          onChange={(e) => setGame({ ...game, available: e.target.value })}
+          onChange={handleCheckbox}
           checked={game.available}
         />
         <label htmlFor="genre">Genre:</label>
@@ -100,7 +109,7 @@ const NewGameForm = () => {
           id="genre"
           value={game.genre}
           type="text"
-          onChange={(e) => setGame({ ...game, genre: e.target.value })}
+          onChange={handleFormTextChange}
           placeholder="Game genre ex. 'MMO'."
           required
         />
@@ -112,7 +121,7 @@ const NewGameForm = () => {
           step={1}
           min={1}
           max={5}
-          onChange={(e) => setGame({ ...game, score: e.target.value })}
+          onChange={handleFormTextChange}
           placeholder="Game score rating between 1 and 5"
           required
         />

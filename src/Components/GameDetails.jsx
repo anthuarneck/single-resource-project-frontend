@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useAuth } from "./UserComponents/UserContext";
+
 const API = import.meta.env.VITE_API_URL;
+
 const GameDetails = () => {
   const [game, setGame] = useState([]);
-  const { user } = useAuth();
   let { userId, index } = useParams();
   let navigate = useNavigate();
+  
   useEffect(() => {
     fetch(`${API}/users/${userId}/games/${index}`)
       .then((response) => response.json())
@@ -17,15 +18,19 @@ const GameDetails = () => {
         console.error(err);
       });
   }, []);
+
   const handleDelete = () => {
     deleteGame();
   };
+
   const handleFavorite = () => {
     favoriteGame();
   };
+
   const handleCart = () => {
     addGameToCart();
   };
+
   const deleteGame = () => {
     const httpOptions = { method: "DELETE" };
     fetch(`${API}/users/${userId}/games/${index}`, httpOptions)
@@ -35,6 +40,7 @@ const GameDetails = () => {
       })
       .catch((error) => console.error(error));
   };
+
   const favoriteGame = () => {
     const httpOptions = {
       method: "POST",
@@ -43,6 +49,7 @@ const GameDetails = () => {
       },
       body: JSON.stringify({ user_id: userId, game_id: index }),
     };
+
     fetch(`${API}/users/${userId}/favoritedGames/${index}`, httpOptions)
       .then((response) => {
         if (!response.ok) {
@@ -58,6 +65,7 @@ const GameDetails = () => {
         console.error("Fetch error:", error);
       });
   };
+
   const addGameToCart = () => {
     const httpOptions = {
       method: "POST",
@@ -81,6 +89,7 @@ const GameDetails = () => {
         console.error("Fetch error:", error);
       });
   };
+
   return (
     <div>
       <article>

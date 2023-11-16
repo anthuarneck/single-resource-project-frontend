@@ -6,19 +6,19 @@ const GamesCart = () => {
   const [games, setGames] = useState([]);
   const [gameBalance, setGameBalance] = useState(0);
 
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const response = await fetch(`${API}/games`);
-        const gamesData = await response.json();
-        setGames(gamesData.data.payload);
-      } catch (error) {
-        console.error('Error fetching games:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchGames = async () => {
+  //     try {
+  //       const response = await fetch(`${API}/games`);
+  //       const gamesData = await response.json();
+  //       setGames(gamesData.data.payload);
+  //     } catch (error) {
+  //       console.error('Error fetching games:', error);
+  //     }
+  //   };
 
-    fetchGames();
-  }, []);
+  //   fetchGames();
+  // }, []);
 
   const calculateBalance = () => {
     let cartBalance = 0;
