@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "./UserComponents/UserContext";
+
 
 const API = import.meta.env.VITE_API_URL;
 
 const NewGameForm = () => {
-    const { userId } = useParams();
+    const { user } = useAuth();
+
   const [game, setGame] = useState({
-    user_id: userId,
     title: "",
     price: 0.0,
     esrb_rating: "",
@@ -18,7 +20,7 @@ const NewGameForm = () => {
   const navigate = useNavigate();
 
   const addGame = () => {
-    fetch(`${API}/users/${userId}/games/new`, {
+    fetch(`${API}/users/${user.id}/games/new`, {
       method: "POST",
       body: JSON.stringify(game),
       headers: {
@@ -26,7 +28,7 @@ const NewGameForm = () => {
       },
     })
       .then(() => {
-        navigate(`/games`);
+        navigate(`/users/${user.id}/games`);
       })
       .catch((error) => {
         console.error(error);
@@ -54,7 +56,7 @@ const NewGameForm = () => {
           id="Title"
           value={game.title}
           type="text"
-          onChange={handleFormTextChange}
+          onChange={(e) => setGame({ ...game, title: e.target.value })}
           placeholder="Game title"
           required
         />
@@ -64,7 +66,7 @@ const NewGameForm = () => {
           value={game.price}
           type="number"
           step={0.01}
-          onChange={(e) => handleFormTextChange(e)}
+          onChange={(e) => setGame({ ...game, price: e.target.value })}
           placeholder="Enter the price of the game."
           required
         />
@@ -73,7 +75,7 @@ const NewGameForm = () => {
           id="esrb_rating"
           value={game.esrb_rating}
           type="text"
-          onChange={handleFormTextChange}
+          onChange={(e) => setGame({ ...game, esrb_rating: e.target.value })}
           placeholder="Enter esrb (Entertainment Software Rating Board) rating for the game ex. 'Teen'"
           required
         />
@@ -82,7 +84,7 @@ const NewGameForm = () => {
           id="release_Year"
           value={game.release_year}
           type="number"
-          onChange={(e) => handleFormTextChange(e)}
+          onChange={(e) => setGame({ ...game, release_year: e.target.value })}
           placeholder="Year of release"
           required
         />
@@ -90,7 +92,7 @@ const NewGameForm = () => {
         <input
           id="available"
           type="checkbox"
-          onChange={handleCheckbox}
+          onChange={(e) => setGame({ ...game, available: e.target.value })}
           checked={game.available}
         />
         <label htmlFor="genre">Genre:</label>
@@ -98,7 +100,7 @@ const NewGameForm = () => {
           id="genre"
           value={game.genre}
           type="text"
-          onChange={handleFormTextChange}
+          onChange={(e) => setGame({ ...game, genre: e.target.value })}
           placeholder="Game genre ex. 'MMO'."
           required
         />
@@ -110,10 +112,11 @@ const NewGameForm = () => {
           step={1}
           min={1}
           max={5}
-          onChange={(e) => handleFormTextChange(e)}
+          onChange={(e) => setGame({ ...game, score: e.target.value })}
           placeholder="Game score rating between 1 and 5"
           required
         />
+        <input type="submit" />
       </form>
     </div>
   );

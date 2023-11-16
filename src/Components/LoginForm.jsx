@@ -11,7 +11,7 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-  const {loginUser, user, setUser} = useAuth();
+  const { user } = useAuth();
   
   useEffect(() => {
     if (user.id) {
@@ -19,29 +19,6 @@ const LoginForm = () => {
       navigate(`/users/${user.id}/games`)
     }
   }, [user])
-
-  // const loginUser = () => {
-  //   fetch(`${API}/users/`, {
-  //     method: "POST",
-  //     body: JSON.stringify(user),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json();
-  //       }
-  //       alert("Login failed: Invalid email or password");
-  //       throw new Error("Login Failed");
-  //     })
-  //     .then((userData) => {
-  //       console.log(userData);
-  //       setUser((prevState) => ({ ...prevState, id: userData.id }));
-  //       navigate(`/users/${userData.user.id}/games`);
-  //     })
-  //     .catch((error) => console.error("catch", error));
-  // };
 
   const handleTextChange = (event) => {
     setUserInput({ ...userInput, [event.target.id]: event.target.value });

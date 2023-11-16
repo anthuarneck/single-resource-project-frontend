@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "./UserComponents/UserContext";
+
 
 const API = import.meta.env.VITE_API_URL;
 
 const GameDetails = () => {
   const [game, setGame] = useState([]);
-  let { userId, index } = useParams();
+  const { user } = useAuth();
+  let { index } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API}/users/${userId}/games/${index}`)
+    fetch(`${API}/users/${user.id}/games/${index}`)
       .then((response) => response.json())
       .then((response) => {
         setGame(response);
@@ -26,12 +29,12 @@ const GameDetails = () => {
 
   const deleteGame = () => {
     const httpOptions = { method: "DELETE" };
-    fetch(`${API}/users/${userId}/games/${index}`, httpOptions)
+    fetch(`${API}/users/${user.id}/games/${index}`, httpOptions)
       .then((response) => {
         alert(`You have just deleted the game from your games list`);
-        navigate(`/games`);
+        navigate(`/users/${user.id}/games`);
       })
-    //   .catch((error) => console.error(error));
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -47,7 +50,7 @@ const GameDetails = () => {
         <h5>Score: {game.score}</h5>
       </div>
       <div className="navigation">
-        <Link to={"/games"}>
+        <Link to={`/users/${user.id}/games`}>
           <button>Back</button>
         </Link>
 
