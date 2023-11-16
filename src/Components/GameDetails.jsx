@@ -7,7 +7,7 @@ const API = import.meta.env.VITE_API_URL;
 
 const GameDetails = () => {
   const [game, setGame] = useState([]);
-  // const { user } = useAuth();
+  const { user } = useAuth();
   let { index, userId } = useParams();
   let navigate = useNavigate();
 

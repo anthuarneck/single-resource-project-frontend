@@ -9,10 +9,9 @@ const Navbar = () => {
     const { userId } = useParams()
     const [favoritedGames, setFavoritedGames] = useState([])
 
-    console.log(user)
     useEffect(() => {
-        if (user.id) {
-          fetch(`${API}/users/${user.id}/favoritedGames`)
+        if (userId) {
+          fetch(`${API}/users/${userId}/favoritedGames`)
             .then((response) => response.json())
             .then((response) => {
               console.log(response);
@@ -22,7 +21,7 @@ const Navbar = () => {
               console.error(error);
             });
         }
-      }, [user.id]); 
+      }, [userId]); 
 
     return (
         <nav>
