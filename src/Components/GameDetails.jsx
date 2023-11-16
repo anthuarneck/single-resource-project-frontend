@@ -69,13 +69,27 @@ const GameDetails = () => {
   };
 
   const addGameToCart = () => {
-    const httpOptions = { method: "POST" };
+    const httpOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ game_id: index }),
+    };
     fetch(`${API}/users/${userId}/cart`, httpOptions)
       .then((response) => {
-        alert(`You have just deleted the game from your games list`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert(`Game added to Cart`);
         navigate(`/users/${userId}/games`);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error("Fetch error:", error);
+      });
   };
 
   return (
