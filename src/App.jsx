@@ -33,7 +33,7 @@ function App() {
               element={<FavoriteGames />}
             />
             <Route path="/users/:userId/games/new" element={<New />} />
-            <Route path="/edit" element={<Edit />} />
+            <Route path="/users/:userId/games/:index/edit" element={<Edit />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </AuthProvider>

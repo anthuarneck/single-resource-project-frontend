@@ -14,7 +14,7 @@ const Game = ({ game }) => {
         </a>
       </td>
       <td>
-        <Link to={`/games/${game.id}`}>✏️</Link>
+        <Link to={`/users/${userId}/games/${game.id}/edit`}>✏️</Link>
       </td>
     </tr>
   );

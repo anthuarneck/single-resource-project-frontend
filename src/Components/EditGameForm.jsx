@@ -1,5 +1,6 @@
-import React,{ useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React,{ useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from "./UserComponents/UserContext";
 
 const API = import.meta.env.VITE_API_URL
 
@@ -14,10 +15,14 @@ const EditGameForm = () => {
         genre: "",
         score: 0,
       });
+   
+      let { userId, index } = useParams();
       const navigate = useNavigate();
+
+   
     
       const editGame = () => {
-        fetch(`${API}/games`, {
+        fetch(`${API}/users/${userId}/games/${index}`, {
           method: "PUT",
           body: JSON.stringify(game),
           headers: {
@@ -25,7 +30,7 @@ const EditGameForm = () => {
           },
         })
           .then(() => {
-            navigate(`/games`);
+            navigate(`/users/${userId}/games`);
           })
           .catch((error) => {
             console.error(error);
@@ -50,7 +55,7 @@ const EditGameForm = () => {
           <form onSubmit={handleSubmit}>
             <label htmlFor="Title">Title:</label>
             <input
-              id="Title"
+              id="title"
               value={game.title}
               type="text"
               onChange={handleFormTextChange}
@@ -59,7 +64,7 @@ const EditGameForm = () => {
             />
             <label htmlFor="Price">Price:</label>
             <input
-              id="Price"
+              id="price"
               value={game.price}
               type="number"
               step={0.01}
@@ -78,7 +83,7 @@ const EditGameForm = () => {
             />
             <label htmlFor="release_Year">Year Of Release:</label>
             <input
-              id="release_Year"
+              id="release_year"
               value={game.release_year}
               type="number"
               onChange={(e) => handleFormTextChange(e)}
@@ -113,6 +118,8 @@ const EditGameForm = () => {
               placeholder="Game score rating between 1 and 5"
               required
             />
+          < br/>
+          <input type="submit" />
           </form>
         </div>
       );

@@ -11,7 +11,7 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-  const { user } = useAuth();
+  const { user, loginUser } = useAuth();
   
   useEffect(() => {
     if (user.id) {
