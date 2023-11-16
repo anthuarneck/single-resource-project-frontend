@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 
 const API = import.meta.env.VITE_API_URL;
 
 const Navbar = () => {
     const { userId } = useParams()
+    const [favoritedGames, setFavoritedGames] = useState([])
 
 
     useEffect(() => {
@@ -24,10 +25,10 @@ const Navbar = () => {
     return (
         <nav>
             <h2>
-                <Link to="/games">Games</Link>
+                <Link to={`/users/${userId}/games`}>Games</Link>
             </h2>
             <h2>
-                <Link to="/users/:userId/favoritedGames">Favorited Games</Link>
+                <Link to={`/users/${userId}/favoritedGames`}>Favorited Games</Link>
             </h2>
         </nav>
     );
