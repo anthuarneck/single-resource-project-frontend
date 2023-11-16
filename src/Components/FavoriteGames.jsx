@@ -6,11 +6,10 @@ const API = import.meta.env.VITE_API_URL;
 
 const FavoriteGames = () => {
   const [favoritedGames, setFavoritedGames] = useState([]);
-  const { user } = useAuth();
-  const { userId } = useParams
+  const { userId } = useParams()
 
   useEffect(() => {
-    if (user && userId) {
+    if (userId) {
       fetch(`${API}/users/${userId}/favoritedGames`)
         .then((response) => {
           if (!response.ok) {
@@ -26,7 +25,7 @@ const FavoriteGames = () => {
           console.error("Error fetching favorited games:", error);
         });
     }
-  }, [user]);
+  }, [userId]);
 
   return (
     <div className="favoritedGames">
