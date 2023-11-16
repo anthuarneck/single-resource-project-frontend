@@ -9,7 +9,7 @@ import Games from "./Components/Games";
 import Index from "./Pages/Index";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
-import GamesCart from "./Components/gamesCart";
+import Cart from "./Pages/Cart";
 import Favorite from "./Pages/Favorite"
 import Error from "./Pages/Error";
 import Show from "./Pages/Show";
@@ -28,7 +28,7 @@ function App() {
             <Route path="/register" element={<SignUp />} />
             <Route path="/users/:userId/games" element={<Index />} />
             <Route path="/users/:userId/games/:index" element={<Show />} />
-            <Route path="/cart" element={<GamesCart />} />
+            <Route path="/cart" element={<Cart />} />
             <Route
               path="/users/:userId/favoritedGames"
               element={<Favorite/>}
