@@ -6,10 +6,11 @@ const API = import.meta.env.VITE_API_URL;
 
 import Navbar from "./Components/Navbar";
 import Games from "./Components/Games";
+import Index from "./Pages/Index";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import GamesCart from "./Components/gamesCart";
-import FavoriteGames from "./Components/FavoriteGames";
+import Favorite from "./Pages/Favorite"
 import Error from "./Pages/Error";
 import Show from "./Pages/Show";
 import New from "./Pages/New";
@@ -21,19 +22,18 @@ function App() {
     <div className="App">
       <Router>
         <AuthProvider>
-            <Navbar />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<SignUp />} />
-            <Route path="/users/:userId/games" element={<Games />} />
+            <Route path="/users/:userId/games" element={<Index />} />
             <Route path="/users/:userId/games/:index" element={<Show />} />
             <Route path="/cart" element={<GamesCart />} />
             <Route
               path="/users/:userId/favoritedGames"
-              element={<FavoriteGames />}
+              element={<Favorite/>}
             />
             <Route path="/users/:userId/games/new" element={<New />} />
-            <Route path="/edit" element={<Edit />} />
+            <Route path="/users/:userId/games/:index/edit" element={<Edit />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </AuthProvider>

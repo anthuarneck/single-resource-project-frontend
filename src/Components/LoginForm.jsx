@@ -11,17 +11,14 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-  const { loginUser, user } = useAuth();
-  console.log(user.id)
-  console.log(user)
-
-
+  const { user, loginUser } = useAuth();
   useEffect(() => {
     if (user.id) {
       console.log(user.id)
       navigate(`/users/${user.id}/games`)
     }
   }, [user])
+
 
   const handleTextChange = (event) => {
     setUserInput({ ...userInput, [event.target.id]: event.target.value });

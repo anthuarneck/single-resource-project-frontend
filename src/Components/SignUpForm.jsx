@@ -23,7 +23,7 @@ const SignUpForm = () => {
       },
     })
       .then(() => {
-        navigate(`/games`);
+        navigate(`/`);
       })
       .catch((error) => console.error("catch", error));
   };
