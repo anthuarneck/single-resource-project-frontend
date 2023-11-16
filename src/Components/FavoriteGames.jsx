@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "./UserComponents/UserContext";
+import { useParams } from "react-router-dom";
 
 const API = import.meta.env.VITE_API_URL;
 
 const FavoriteGames = () => {
   const [favoritedGames, setFavoritedGames] = useState([]);
-  const { user } = useAuth();
+  const { userId } = useParams()
 
   useEffect(() => {
-    if (user && user.id) {
-      fetch(`${API}/users/${user.id}/favoritedGames`)
+    if (userId) {
+      fetch(`${API}/users/${userId}/favoritedGames`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -24,7 +25,7 @@ const FavoriteGames = () => {
           console.error("Error fetching favorited games:", error);
         });
     }
-  }, [user]);
+  }, [userId]);
 
   return (
     <div className="favoritedGames">
