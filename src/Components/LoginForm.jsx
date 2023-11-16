@@ -11,7 +11,7 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-  const {loginUser, user, setUser} = useAuth();
+  const { user } = useAuth();
   
   useEffect(() => {
     if (user.id) {
@@ -19,8 +19,6 @@ const LoginForm = () => {
       navigate(`/users/${user.id}/games`)
     }
   }, [user])
-
-
 
 
   const handleTextChange = (event) => {
