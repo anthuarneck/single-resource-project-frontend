@@ -23,7 +23,6 @@ export const AuthProvider = (props) => {
     })
      .then((response) => response.json())
      .then(data => {
-        console.log(data)
         setUser(data)
         navigate(`/users/${data.user.id}/games`)
      })

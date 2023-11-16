@@ -7,8 +7,8 @@ const API = import.meta.env.VITE_API_URL;
 
 const GameDetails = () => {
   const [game, setGame] = useState([]);
-  const { user } = useAuth();
-  let { index } = useParams();
+  // const { user } = useAuth();
+  let { index, userId } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -26,10 +26,38 @@ const GameDetails = () => {
   const handleDelete = () => {
     deleteGame()
   }
+  
+  const handleFavorite = () => {
+    favoriteGame()
+  }
+
+  const handleCart = () => {
+    addGameToCart();
+  }
 
   const deleteGame = () => {
     const httpOptions = { method: "DELETE" };
     fetch(`${API}/users/${user.id}/games/${index}`, httpOptions)
+      .then((response) => {
+        alert(`You have just deleted the game from your games list`);
+        navigate(`/users/${user.id}/games`);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const favoriteGame = () => {
+    const httpOptions = { method: "POST" };
+    fetch(`${API}/users/${user.id}/favoritedGames`, httpOptions)
+      .then((response) => {
+        alert(`Game has been added to your favorites.`);
+        navigate(`/users/${user.id}/favoritedGames`);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const addGameToCart = () => {
+    const httpOptions = { method: "POST" };
+    fetch(`${API}/users/${user.id}/cart`, httpOptions)
       .then((response) => {
         alert(`You have just deleted the game from your games list`);
         navigate(`/users/${user.id}/games`);
@@ -55,6 +83,8 @@ const GameDetails = () => {
         </Link>
 
         <button onClick={handleDelete}>Delete</button>
+        <button onClick={handleFavorite}>Add to favorites</button>
+        <button onClick={handleCart}>Add to cart</button>
       </div>
     </article>
 

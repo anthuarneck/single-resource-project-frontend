@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <Router>
         <AuthProvider>
-          <Navbar />
+            <Navbar />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<SignUp />} />
