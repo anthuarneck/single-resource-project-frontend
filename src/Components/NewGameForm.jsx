@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const API = import.meta.env.VITE_API_URL;
 
 const NewGameForm = () => {
+    const { userId } = useParams();
   const [game, setGame] = useState({
-    // user_id,
+    user_id: userId,
     title: "",
     price: 0.0,
     esrb_rating: "",
@@ -17,7 +18,7 @@ const NewGameForm = () => {
   const navigate = useNavigate();
 
   const addGame = () => {
-    fetch(`${API}/games`, {
+    fetch(`${API}/users/${userId}/games/new`, {
       method: "POST",
       body: JSON.stringify(game),
       headers: {

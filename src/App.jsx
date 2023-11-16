@@ -14,13 +14,13 @@ import Error from "./Pages/Error";
 import Show from "./Pages/Show";
 import New from "./Pages/New";
 import Edit from "./Pages/Edit";
-import { AuthProvider } from "../src/Components/UserComponents/UserContext"
+import { AuthProvider } from "../src/Components/UserComponents/UserContext";
 
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
-        <Router>
+      <Router>
+        <AuthProvider>
           <Navbar />
           <Routes>
             <Route path="/" element={<Login />} />
@@ -32,12 +32,12 @@ function App() {
               path="/users/:userId/favoritedGames"
               element={<FavoriteGames />}
             />
-            <Route path="/new" element={<New />} />
+            <Route path="/users/:userId/games/new" element={<New />} />
             <Route path="/edit" element={<Edit />} />
             <Route path="*" element={<Error />} />
           </Routes>
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
