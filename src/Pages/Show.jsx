@@ -3,6 +3,7 @@ import GameDetails from '../Components/GameDetails';
 import Navbar from '../Components/Navbar';
 
 const Show = () => {
+    
     return (
         <div>
             <Navbar />

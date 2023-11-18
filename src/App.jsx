@@ -27,7 +27,7 @@ function App() {
             <Route path="/register" element={<SignUp />} />
             <Route path="/users/:userId/games" element={<Index />} />
             <Route path="/users/:userId/games/:index" element={<Show />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/users/:userId/cart" element={<Cart />} />
             <Route
               path="/users/:userId/favoritedGames"
               element={<Favorite/>}

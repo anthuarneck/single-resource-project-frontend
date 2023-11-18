@@ -12,6 +12,7 @@ export const AuthProvider = (props) => {
     email: false,
     password: false,
   });
+  const [cartGames, setCartGames] = useState([])
   const loginUser = (userInput) => {
       console.log(userInput)
     fetch(`${API}/users/`, {
@@ -28,7 +29,11 @@ export const AuthProvider = (props) => {
      })
   };
 
+  
+
   const value = {
+    cartGames,
+    setCartGames,
     user,
     loginUser,
   };
