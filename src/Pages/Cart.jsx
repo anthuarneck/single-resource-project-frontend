@@ -1,8 +1,12 @@
 import React from 'react';
-import GamesCart from '../Components/gamesCart';
+import GamesCart from '../Components/GamesCart';
 import Navbar from '../Components/Navbar';
 
 const Cart = () => {
+
+
+
+  
     return (
         <div>
             <Navbar />

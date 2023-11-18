@@ -4,7 +4,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
 const GameDetails = () => {
-  const [game, setGame] = useState([]);
+
+  const [game, setGame] = useState({});
+  const { cartGames, setCartGames } = useAuth();
   let { userId, index } = useParams();
   let navigate = useNavigate();
   
@@ -19,17 +21,7 @@ const GameDetails = () => {
       });
   }, []);
 
-  const handleDelete = () => {
-    deleteGame();
-  };
 
-  const handleFavorite = () => {
-    favoriteGame();
-  };
-
-  const handleCart = () => {
-    addGameToCart();
-  };
 
   const deleteGame = () => {
     const httpOptions = { method: "DELETE" };
@@ -67,9 +59,23 @@ const GameDetails = () => {
   };
 
   const addGameToCart = () => {
-   
+    console.log(game)
+    setCartGames(currentGames => [...currentGames, game]);
+  };
+  
+    const handleCart = () => {
+      addGameToCart();
+      console.log(cartGames)
+    };
+
+  const handleDelete = () => {
+    deleteGame();
   };
 
+  const handleFavorite = () => {
+    favoriteGame();
+  };
+  
   return (
     <div>
       <article>

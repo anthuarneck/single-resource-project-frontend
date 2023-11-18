@@ -9,9 +9,9 @@ const Game = ({ game }) => {
         {game.available ? <span>👾</span> : <span>&nbsp; &nbsp; &nbsp;</span>}
       </td>
       <td style={{ cursor: "alias" }}>
-        <a href={`/users/${userId}/games/${game.id}`} rel="noreferrer">
+        <Link to={`/users/${userId}/games/${game.id}`}>
           {game.title}
-        </a>
+        </Link>
       </td>
       <td>
         <Link to={`/users/${userId}/games/${game.id}/edit`}>✏️</Link>

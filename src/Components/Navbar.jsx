@@ -14,7 +14,6 @@ const Navbar = () => {
           fetch(`${API}/users/${userId}/favoritedGames`)
             .then((response) => response.json())
             .then((response) => {
-              console.log(response);
               setFavoritedGames(response);
             })
             .catch((error) => {
@@ -33,6 +32,9 @@ const Navbar = () => {
             </h2>
             <h2>
               <Link to={`/users/${userId}/games/new`}>Add New Game</Link>
+            </h2>
+            <h2>
+              <Link to={`/users/${userId}/cart`}>Cart</Link>
             </h2>
         </nav>
     );
