@@ -28,7 +28,6 @@ const GamesCart = () => {
   
     setGameBalance(cartBalance);
   };
-  console.log(cartGames)
   
   useEffect(() => {
     calculateBalance();

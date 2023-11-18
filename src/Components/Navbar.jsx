@@ -14,7 +14,6 @@ const Navbar = () => {
           fetch(`${API}/users/${userId}/favoritedGames`)
             .then((response) => response.json())
             .then((response) => {
-              console.log(response);
               setFavoritedGames(response);
             })
             .catch((error) => {
