@@ -29,3 +29,10 @@ To use the Game Store App:
 - Database: [PostgreSQL](https://www.postgresql.org/)
 - Authentication: [bcrypt]
 - Hosting/Deployment: [Render, Netlify]
+
+## Links
+
+- Deployed Backend: https://game-store-app.onrender.com
+- Deployed Frontend: https://loquacious-panda-b80a7a.netlify.app/
+- Backend GitHub Repo: https://github.com/anthuarneck/single-resource-project-backend
+- Trello: https://trello.com/b/tPabsFMb/single-resource-app
