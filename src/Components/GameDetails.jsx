@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "./UserComponents/UserContext";
 
 const API = import.meta.env.VITE_API_URL;
 
