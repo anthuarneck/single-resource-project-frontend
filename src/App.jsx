@@ -1,11 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { useAuth } from "../src/Components/UserComponents/UserContext";
 
 const API = import.meta.env.VITE_API_URL;
 
-import Navbar from "./Components/Navbar";
-import Games from "./Components/Games";
 import Index from "./Pages/Index";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
